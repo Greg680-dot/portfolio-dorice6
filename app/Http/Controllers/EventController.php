@@ -16,12 +16,60 @@ class EventController extends Controller
 
     public function create()
     {
-        return view('admin');
+        $events = Event::latest()->get();
+        return view('admin', compact('events'));
     }
 
     public function store(Request $request)
     {
-        Event::create($request->all());
-        return redirect('/events')->with('success', 'Événement ajouté');
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'type' => 'required|in:passe,encours,avenir',
+            'date' => 'required|date',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+        ]);
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoName = time() . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path('images'), $photoName);
+            $validated['photo'] = $photoName;
+        }
+
+        Event::create($validated);
+        return redirect('/admin')->with('success', 'Événement ajouté avec succès');
+    }
+
+    public function edit(Event $event)
+    {
+        return view('admin', compact('event'));
+    }
+
+    public function update(Request $request, Event $event)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'type' => 'required|in:passe,encours,avenir',
+            'date' => 'required|date',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+        ]);
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoName = time() . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path('images'), $photoName);
+            $validated['photo'] = $photoName;
+        }
+
+        $event->update($validated);
+        return redirect('/admin')->with('success', 'Événement modifié avec succès');
+    }
+
+    public function destroy(Event $event)
+    {
+        $event->delete();
+        return redirect('/admin')->with('success', 'Événement supprimé avec succès');
     }
 }

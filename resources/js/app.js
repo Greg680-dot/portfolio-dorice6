@@ -2,13 +2,12 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const phrases = [
-    'Coaching stratégique',
-    'Leadership féminin',
-    'Soft skills puissants',
-    'Transformation professionnelle',
-    'Design expérientiel',
-    'Impact durable',
-    'Confiance retrouvée',
+    'Education aux medias',
+    'Genre et medias',
+    'Soft skills',
+    'Capitalisation d experience',
+    'Citoyennete numerique',
+    'Leadership des femmes',
 ];
 
 let phraseIndex = 0;
@@ -76,6 +75,35 @@ function initScrollProgress() {
     });
 }
 
+function initMobileNav() {
+    const button = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+
+    if (!button || !menu) {
+        return;
+    }
+
+    button.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        const expanded = menu.classList.contains('hidden') ? 'false' : 'true';
+        button.setAttribute('aria-expanded', expanded);
+    });
+
+    menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            menu.classList.add('hidden');
+            button.setAttribute('aria-expanded', 'false');
+        });
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768 && !menu.classList.contains('hidden')) {
+            menu.classList.add('hidden');
+            button.setAttribute('aria-expanded', 'false');
+        }
+    });
+}
+
 function initCounters() {
     const counters = document.querySelectorAll('[data-count-target]');
     if (!counters.length) {
@@ -96,46 +124,7 @@ function initCounters() {
     counters.forEach((counter) => observer.observe(counter));
 }
 
-// Curseur personnalisé dynamique
-function initCustomCursor() {
-    const cursor = document.createElement('div');
-    cursor.className = 'custom-cursor';
-    cursor.innerHTML = '<div class="cursor-dot"></div><div class="cursor-outline"></div>';
-    document.body.appendChild(cursor);
-
-    let mouseX = 0;
-    let mouseY = 0;
-    let cursorX = 0;
-    let cursorY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    function updateCursor() {
-        const dx = mouseX - cursorX;
-        const dy = mouseY - cursorY;
-
-        cursorX += dx * 0.15;
-        cursorY += dy * 0.15;
-
-        cursor.style.left = `${cursorX}px`;
-        cursor.style.top = `${cursorY}px`;
-
-        requestAnimationFrame(updateCursor);
-    }
-
-    updateCursor();
-
-    // Effets sur les liens et boutons
-    const interactiveElements = document.querySelectorAll('a, button, [role="button"]');
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
-}
-
+// Curseur personnalisÃ© dynamique
 // Particules flottantes
 function initFloatingParticles() {
     const particlesContainer = document.createElement('div');
@@ -201,7 +190,7 @@ function initGradientAnimation() {
     });
 }
 
-// Thème dynamique basé sur l'heure
+// ThÃ¨me dynamique basÃ© sur l'heure
 function initDynamicTheme() {
     const hour = new Date().getHours();
     const body = document.body;
@@ -222,7 +211,7 @@ function initDynamicTheme() {
             body.classList.remove('night-mode');
             body.classList.add('day-mode');
         }
-    }, 3600000); // Vérifier chaque heure
+    }, 3600000); // VÃ©rifier chaque heure
 }
 
 // Tooltips interactifs
@@ -263,7 +252,7 @@ function initScrollInteractions() {
         });
     }, observerOptions);
 
-    // Observer tous les éléments avec des classes d'animation
+    // Observer tous les Ã©lÃ©ments avec des classes d'animation
     document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 }
 
@@ -285,7 +274,7 @@ function initScrollReveal() {
     reveals.forEach(reveal => revealObserver.observe(reveal));
 }
 
-// Animation des éléments au hover
+// Animation des Ã©lÃ©ments au hover
 function initHoverEffects() {
     const hoverElements = document.querySelectorAll('.hover-lift, .hover-glow, .hover-scale');
 
@@ -302,7 +291,7 @@ function initHoverEffects() {
     });
 }
 
-// Effet de texte qui se révèle lettre par lettre
+// Effet de texte qui se rÃ©vÃ¨le lettre par lettre
 function initTextReveal() {
     const textElements = document.querySelectorAll('.text-reveal');
 
@@ -319,7 +308,7 @@ function initTextReveal() {
     });
 }
 
-// Animation des icônes
+// Animation des icÃ´nes
 function initIconAnimations() {
     const icons = document.querySelectorAll('.icon-animate');
 
@@ -361,13 +350,12 @@ window.addEventListener('DOMContentLoaded', () => {
     updateHeroTyping();
     initScrollProgress();
     initCounters();
-    initCustomCursor();
+    initMobileNav();
     initFloatingParticles();
     initCardAnimations();
     initParallax();
     initGradientAnimation();
     initDynamicTheme();
-    initStatsAnimation();
     initTooltips();
     initScrollInteractions();
     initScrollReveal();

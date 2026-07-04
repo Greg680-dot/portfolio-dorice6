@@ -24,14 +24,18 @@
                 @foreach($events->where('type', 'avenir') as $event)
                 <article class="group overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl shadow-slate-950/20 transition hover:-translate-y-2 hover:border-fuchsia-300/30">
                     <div class="relative overflow-hidden">
-                        <div class="aspect-[4/3] bg-gradient-to-br from-fuchsia-500/20 via-cyan-500/10 to-violet-500/20 flex items-center justify-center">
-                            <div class="text-center">
-                                <div class="inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-fuchsia-500/20 text-fuchsia-200 text-2xl font-bold mb-4">
-                                    📅
+                        @if($event->photo)
+                            <img src="/images/{{ $event->photo }}" alt="{{ $event->title }}" class="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-110">
+                        @else
+                            <div class="aspect-[4/3] bg-gradient-to-br from-fuchsia-500/20 via-cyan-500/10 to-violet-500/20 flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-fuchsia-500/20 text-fuchsia-200 text-2xl font-bold mb-4">
+                                        📅
+                                    </div>
+                                    <p class="text-xs uppercase tracking-[0.25em] text-white/70">Prochainement</p>
                                 </div>
-                                <p class="text-xs uppercase tracking-[0.25em] text-white/70">Prochainement</p>
                             </div>
-                        </div>
+                        @endif
                         <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 to-transparent p-6">
                             <span class="inline-flex rounded-full bg-fuchsia-100/90 px-3 py-1 text-xs uppercase tracking-[0.24em] text-fuchsia-700">{{ strtoupper($event->type ?? 'Événement') }}</span>
                             <h3 class="mt-3 text-xl font-bold text-white">{{ $event->title }}</h3>
@@ -62,14 +66,18 @@
                 @foreach($events->where('type', 'encours') as $event)
                 <article class="group overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-cyan-500/10 to-violet-500/10 shadow-2xl shadow-slate-950/20 transition hover:-translate-y-2 hover:border-cyan-300/30">
                     <div class="relative overflow-hidden">
-                        <div class="aspect-[4/3] bg-gradient-to-br from-cyan-500/20 via-violet-500/10 to-fuchsia-500/20 flex items-center justify-center">
-                            <div class="text-center">
-                                <div class="inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-cyan-500/20 text-cyan-200 text-2xl font-bold mb-4 animate-pulse">
-                                    🚀
+                        @if($event->photo)
+                            <img src="/images/{{ $event->photo }}" alt="{{ $event->title }}" class="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-110">
+                        @else
+                            <div class="aspect-[4/3] bg-gradient-to-br from-cyan-500/20 via-violet-500/10 to-fuchsia-500/20 flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-cyan-500/20 text-cyan-200 text-2xl font-bold mb-4 animate-pulse">
+                                        🚀
+                                    </div>
+                                    <p class="text-xs uppercase tracking-[0.25em] text-white/70">Actuellement</p>
                                 </div>
-                                <p class="text-xs uppercase tracking-[0.25em] text-white/70">Actuellement</p>
                             </div>
-                        </div>
+                        @endif
                         <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 to-transparent p-6">
                             <span class="inline-flex rounded-full bg-cyan-100/90 px-3 py-1 text-xs uppercase tracking-[0.24em] text-cyan-700">{{ strtoupper($event->type ?? 'Événement') }}</span>
                             <h3 class="mt-3 text-xl font-bold text-white">{{ $event->title }}</h3>
@@ -100,14 +108,18 @@
                 @foreach($events->where('type', 'passe') as $event)
                 <article class="group overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl shadow-slate-950/20 transition hover:-translate-y-2 hover:border-violet-300/30 opacity-75 hover:opacity-100">
                     <div class="relative overflow-hidden">
-                        <div class="aspect-[4/3] bg-gradient-to-br from-violet-500/20 via-fuchsia-500/10 to-slate-500/20 flex items-center justify-center">
-                            <div class="text-center">
-                                <div class="inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-violet-500/20 text-violet-200 text-2xl font-bold mb-4">
-                                    ✅
+                        @if($event->photo)
+                            <img src="/images/{{ $event->photo }}" alt="{{ $event->title }}" class="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-110">
+                        @else
+                            <div class="aspect-[4/3] bg-gradient-to-br from-violet-500/20 via-fuchsia-500/10 to-slate-500/20 flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-violet-500/20 text-violet-200 text-2xl font-bold mb-4">
+                                        ✅
+                                    </div>
+                                    <p class="text-xs uppercase tracking-[0.25em] text-white/70">Terminé</p>
                                 </div>
-                                <p class="text-xs uppercase tracking-[0.25em] text-white/70">Terminé</p>
                             </div>
-                        </div>
+                        @endif
                         <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 to-transparent p-6">
                             <span class="inline-flex rounded-full bg-violet-100/90 px-3 py-1 text-xs uppercase tracking-[0.24em] text-violet-700">{{ strtoupper($event->type ?? 'Événement') }}</span>
                             <h3 class="mt-3 text-xl font-bold text-white">{{ $event->title }}</h3>

@@ -19,7 +19,6 @@
         min-height: 100vh;
         background-image: radial-gradient(circle at top left, rgba(79, 70, 229, 0.14), transparent 34%),
             radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.16), transparent 28%);
-        cursor: none;
     }
 
     #scroll-progress {
@@ -33,47 +32,6 @@
     }
 
     /* Curseur personnalisé */
-    .custom-cursor {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 9999;
-        pointer-events: none;
-        mix-blend-mode: difference;
-    }
-
-    .cursor-dot {
-        width: 8px;
-        height: 8px;
-        background: #fff;
-        border-radius: 50%;
-        position: absolute;
-        top: -4px;
-        left: -4px;
-        transition: transform 0.1s ease;
-    }
-
-    .cursor-outline {
-        width: 40px;
-        height: 40px;
-        border: 2px solid rgba(255, 255, 255, 0.5);
-        border-radius: 50%;
-        position: absolute;
-        top: -20px;
-        left: -20px;
-        transition: all 0.3s ease;
-    }
-
-    .custom-cursor.hover .cursor-outline {
-        transform: scale(1.5);
-        border-color: rgba(236, 72, 153, 0.8);
-    }
-
-    .custom-cursor.hover .cursor-dot {
-        background: rgba(236, 72, 153, 1);
-        transform: scale(1.2);
-    }
-
     /* Particules flottantes */
     .floating-particles {
         position: fixed;
