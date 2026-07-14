@@ -4,8 +4,8 @@
 
 <section class="relative overflow-hidden bg-slate-950 text-white" data-parallax="0.3">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(236,72,153,0.22),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(34,211,238,0.16),_transparent_26%)] pointer-events-none"></div>
-    <div class="relative min-h-[90vh] flex flex-col justify-center">
-        <div class="max-w-6xl mx-auto grid gap-12 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+    <div class="relative min-h-[80vh] flex flex-col justify-center">
+        <div class="max-w-6xl mx-auto grid gap-12 px-6 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div data-aos="fade-right">
                 <span class="inline-flex rounded-full bg-fuchsia-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-fuchsia-200">Soft Skills Specialist - Genre et medias - EMI</span>
                 <h1 class="mt-7 text-5xl md:text-7xl font-black leading-tight text-white">
