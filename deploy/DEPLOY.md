@@ -87,6 +87,60 @@ npm install
 npm run build
 ```
 
+## 8. Déploiement automatique (GitHub Actions)
+
+Une fois les étapes 1 à 7 faites au moins une fois à la main, `.github/workflows/deploy.yml` peut prendre le relais : à chaque `git push` sur `main`, GitHub se connecte en SSH au VPS et relance `git pull`, `composer install`, `php artisan migrate --force`, la mise en cache et `npm run build` automatiquement.
+
+**a. Créer un utilisateur de déploiement dédié sur le VPS** (évite d'utiliser ton compte personnel ou root) :
+
+```bash
+sudo adduser deploy
+sudo usermod -aG www-data deploy
+sudo chown -R deploy:www-data /var/www/dorice-portfolio
+```
+
+**b. Générer une paire de clés SSH dédiée** (sur ta machine, pas sur le VPS) :
+
+```bash
+ssh-keygen -t ed25519 -C "github-actions-deploy" -f deploy_key -N ""
+```
+
+Ça crée `deploy_key` (clé privée) et `deploy_key.pub` (clé publique).
+
+**c. Autoriser la clé publique sur le VPS**, avec l'utilisateur `deploy` :
+
+```bash
+ssh-copy-id -i deploy_key.pub deploy@ton-vps
+```
+
+(ou copie manuellement le contenu de `deploy_key.pub` dans `/home/deploy/.ssh/authorized_keys` sur le VPS)
+
+**d. Autoriser ce déploiement à recharger PHP-FPM sans mot de passe**, sinon la commande `sudo systemctl reload php8.3-fpm` du workflow reste bloquée en attente d'un mot de passe :
+
+```bash
+sudo visudo -f /etc/sudoers.d/deploy
+```
+
+Ajouter la ligne :
+
+```
+deploy ALL=(ALL) NOPASSWD: /usr/bin/systemctl reload php8.3-fpm
+```
+
+**e. Ajouter les secrets dans GitHub** : sur le dépôt, **Settings → Secrets and variables → Actions → New repository secret**, créer :
+
+| Secret | Valeur |
+|---|---|
+| `VPS_HOST` | IP ou domaine du VPS |
+| `VPS_USER` | `deploy` |
+| `VPS_SSH_KEY` | le contenu complet de `deploy_key` (la clé **privée**, jamais la `.pub`) |
+| `VPS_PORT` | port SSH, `22` si non modifié (optionnel) |
+| `PROJECT_PATH` | `/var/www/dorice-portfolio` |
+
+Une fois ces secrets renseignés, tout `git push origin main` déclenche le déploiement automatiquement — visible dans l'onglet **Actions** du dépôt GitHub.
+
+⚠️ `db:seed` (création/mise à jour du compte admin) n'est volontairement pas dans le workflow automatique : le relancer à chaque déploiement écraserait le mot de passe admin par celui du `.env` à chaque fois. Ne le relance qu'à la main (`php artisan db:seed --force`), quand tu veux vraiment changer les identifiants admin.
+
 ## Points de vigilance
 
 - Ne plus copier/pointer vers `static-export/` : c'était un export figé sans backend, incompatible avec le formulaire admin.
