@@ -5,6 +5,9 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+/* Variant "light" : actif quand <html> a la classe .light (mode clair choisi par l'utilisateur) */
+@custom-variant light (&:where(.light, .light *));
+
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
@@ -15,10 +18,37 @@
         color-scheme: dark;
     }
 
+    :root.light {
+        color-scheme: light;
+    }
+
+    html {
+        overflow-x: hidden;
+    }
+
     body {
         min-height: 100vh;
+        overflow-x: hidden;
         background-image: radial-gradient(circle at top left, rgba(79, 70, 229, 0.14), transparent 34%),
             radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.16), transparent 28%);
+    }
+
+    .light body {
+        background-image: radial-gradient(circle at top left, rgba(79, 70, 229, 0.06), transparent 34%),
+            radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.08), transparent 28%);
+    }
+
+    /* Bouton de bascule clair/sombre */
+    .theme-toggle-sun {
+        display: none;
+    }
+
+    .light .theme-toggle-sun {
+        display: block;
+    }
+
+    .light .theme-toggle-moon {
+        display: none;
     }
 
     #scroll-progress {
@@ -29,57 +59,6 @@
         width: 0;
         background: linear-gradient(90deg, rgba(236,72,153,1), rgba(79,70,229,1), rgba(34,211,238,1));
         transition: width 0.2s ease-out;
-    }
-
-    /* Widget Google Translate : intégration au thème sombre */
-    .translate-widget .goog-te-gadget {
-        font-family: inherit !important;
-        color: transparent !important;
-        font-size: 0 !important;
-    }
-
-    .translate-widget .goog-te-gadget-simple {
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        border-radius: 9999px !important;
-        padding: 6px 12px !important;
-        display: inline-flex !important;
-        align-items: center !important;
-    }
-
-    .translate-widget .goog-te-gadget-simple .goog-te-menu-value {
-        color: #e2e8f0 !important;
-        font-size: 0.8rem !important;
-    }
-
-    .translate-widget .goog-te-gadget-simple .goog-te-menu-value span {
-        color: #e2e8f0 !important;
-        border: none !important;
-    }
-
-    .translate-widget img {
-        display: none !important;
-    }
-
-    /* Masque le bandeau bleu ajouté par Google en haut de page après traduction */
-    .goog-te-banner-frame {
-        display: none !important;
-    }
-
-    body {
-        top: 0 !important;
-    }
-
-    /* Thèmes dynamiques */
-    body.day-mode {
-        background-image: radial-gradient(circle at top left, rgba(79, 70, 229, 0.08), transparent 34%),
-            radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.1), transparent 28%);
-    }
-
-    body.night-mode {
-        background-image: radial-gradient(circle at top left, rgba(79, 70, 229, 0.2), transparent 34%),
-            radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.25), transparent 28%);
-        filter: brightness(0.9) contrast(1.1);
     }
 
     /* Animation des gradients */

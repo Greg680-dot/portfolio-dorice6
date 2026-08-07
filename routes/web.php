@@ -4,7 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\TrophyController;
+use App\Http\Middleware\SetLocale;
 use App\Models\Event;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +37,14 @@ Route::get('/publications', function () {
 });
 Route::get('/trophees', [TrophyController::class, 'index']);
 Route::get('/trophies', [TrophyController::class, 'index']);
+
+Route::get('/lang/{locale}', function (Request $request, string $locale) {
+    if (in_array($locale, SetLocale::SUPPORTED_LOCALES, true)) {
+        $request->session()->put('locale', $locale);
+    }
+
+    return redirect()->back();
+})->name('lang.switch');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'login'])->middleware(['guest', 'throttle:5,1']);
