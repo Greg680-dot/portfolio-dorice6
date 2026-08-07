@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Trophy;
 
 
 class EventController extends Controller
@@ -17,7 +18,8 @@ class EventController extends Controller
     public function create()
     {
         $events = Event::latest()->get();
-        return view('admin', compact('events'));
+        $trophies = Trophy::latest('date')->get();
+        return view('admin', compact('events', 'trophies'));
     }
 
     public function store(Request $request)
@@ -43,7 +45,9 @@ class EventController extends Controller
 
     public function edit(Event $event)
     {
-        return view('admin', compact('event'));
+        $events = Event::latest()->get();
+        $trophies = Trophy::latest('date')->get();
+        return view('admin', compact('event', 'events', 'trophies'));
     }
 
     public function update(Request $request, Event $event)

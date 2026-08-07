@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title', 'Événements et formations - Dorice DJETON')
+@section('meta_description', 'Découvrez les événements, programmes et formations passés, en cours et à venir portés par Dorice DJETON.')
+
 @section('content')
 
 <section class="py-24 bg-slate-950 text-white">

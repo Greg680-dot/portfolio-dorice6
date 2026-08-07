@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\TrophyController;
 use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 
@@ -30,8 +33,24 @@ Route::get('/publications', function () {
 
     return view('publications', compact('events'));
 });
-Route::get('/admin', [EventController::class, 'create']);
-Route::post('/admin', [EventController::class, 'store']);
-Route::get('/admin/{event}/edit', [EventController::class, 'edit']);
-Route::put('/admin/{event}', [EventController::class, 'update']);
-Route::delete('/admin/{event}', [EventController::class, 'destroy']);
+Route::get('/trophees', [TrophyController::class, 'index']);
+Route::get('/trophies', [TrophyController::class, 'index']);
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'login'])->middleware(['guest', 'throttle:5,1']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send')->middleware('throttle:5,1');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [EventController::class, 'create']);
+    Route::post('/admin', [EventController::class, 'store']);
+    Route::get('/admin/{event}/edit', [EventController::class, 'edit']);
+    Route::put('/admin/{event}', [EventController::class, 'update']);
+    Route::delete('/admin/{event}', [EventController::class, 'destroy']);
+
+    Route::post('/admin/trophees', [TrophyController::class, 'store']);
+    Route::get('/admin/trophees/{trophy}/edit', [TrophyController::class, 'edit']);
+    Route::put('/admin/trophees/{trophy}', [TrophyController::class, 'update']);
+    Route::delete('/admin/trophees/{trophy}', [TrophyController::class, 'destroy']);
+});
