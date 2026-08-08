@@ -6,8 +6,8 @@ return [
         'home' => 'Accueil',
         'expertise' => 'Expertise',
         'programmes' => 'Programmes',
-        'publications' => 'Publications',
-        'trophies' => 'Trophées',
+        'publications' => 'Mes travaux',
+        'trophies' => 'Distinctions',
         'contact' => 'Contact',
         'cta' => 'Contacter',
         'open_menu' => 'Ouvrir le menu',
@@ -185,7 +185,7 @@ return [
     ],
 
     'trophies_page' => [
-        'badge' => 'Trophées',
+        'badge' => 'Distinctions',
         'title' => 'Trophées & prix',
         'text' => 'Les récompenses et distinctions reçues par Dorice DJETON tout au long de son parcours.',
         'placeholder_label' => 'Trophée',

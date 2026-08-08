@@ -6,7 +6,7 @@ return [
         'home' => 'Home',
         'expertise' => 'Expertise',
         'programmes' => 'Programs',
-        'publications' => 'Publications',
+        'publications' => 'My Work',
         'trophies' => 'Awards',
         'contact' => 'Contact',
         'cta' => 'Contact',
