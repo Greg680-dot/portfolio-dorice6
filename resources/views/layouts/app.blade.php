@@ -130,8 +130,9 @@
             <div class="mt-4 flex flex-col gap-2 text-sm">
                 <a href="/" class="transition hover:text-white light:hover:text-slate-950">{{ __('site.nav.home') }}</a>
                 <a href="/#expertise" class="transition hover:text-white light:hover:text-slate-950">{{ __('site.nav.expertise') }}</a>
-                <a href="/publications" class="transition hover:text-white light:hover:text-slate-950">{{ __('site.nav.publications_mobile') }}</a>
-                <a href="/trophees" class="transition hover:text-white light:hover:text-slate-950">{{ __('site.nav.trophies_mobile') }}</a>
+                <a href="/#programmes" class="transition hover:text-white light:hover:text-slate-950">{{ __('site.nav.programmes') }}</a>
+                <a href="/publications" class="transition hover:text-white light:hover:text-slate-950">{{ __('site.nav.publications') }}</a>
+                <a href="/trophees" class="transition hover:text-white light:hover:text-slate-950">{{ __('site.nav.trophies') }}</a>
                 <a href="/#contact" class="transition hover:text-white light:hover:text-slate-950">{{ __('site.nav.contact') }}</a>
             </div>
         </div>
