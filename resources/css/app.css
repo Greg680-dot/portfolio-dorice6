@@ -1,0 +1,197 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+/* Variant "light" : actif quand <html> a la classe .light (mode clair choisi par l'utilisateur) */
+@custom-variant light (&:where(.light, .light *));
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@layer base {
+    :root {
+        color-scheme: dark;
+    }
+
+    :root.light {
+        color-scheme: light;
+    }
+
+    html {
+        overflow-x: hidden;
+    }
+
+    body {
+        min-height: 100vh;
+        overflow-x: hidden;
+        background-image: radial-gradient(circle at top left, rgba(79, 70, 229, 0.14), transparent 34%),
+            radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.16), transparent 28%);
+    }
+
+    .light body {
+        background-image: radial-gradient(circle at top left, rgba(79, 70, 229, 0.06), transparent 34%),
+            radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.08), transparent 28%);
+    }
+
+    /* Bouton de bascule clair/sombre */
+    .theme-toggle-sun {
+        display: none;
+    }
+
+    .light .theme-toggle-sun {
+        display: block;
+    }
+
+    .light .theme-toggle-moon {
+        display: none;
+    }
+
+    #scroll-progress {
+        position: fixed;
+        inset: 0 auto auto 0;
+        height: 4px;
+        z-index: 60;
+        width: 0;
+        background: linear-gradient(90deg, rgba(236,72,153,1), rgba(79,70,229,1), rgba(34,211,238,1));
+        transition: width 0.2s ease-out;
+    }
+
+    /* Animation des gradients */
+    @keyframes gradient-shift {
+        0%, 100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+
+    .animate-gradient {
+        background-size: 200% 200%;
+        animation: gradient-shift 8s ease-in-out infinite;
+    }
+
+    /* Effets de glow */
+    .glow-on-hover {
+        transition: all 0.3s ease;
+    }
+
+    .glow-on-hover:hover {
+        box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+        transform: translateY(-2px);
+    }
+
+    /* Animation des statistiques */
+    .stat-number {
+        font-variant-numeric: tabular-nums;
+        transition: color 0.3s ease;
+    }
+
+    /* Effets de texte */
+    .text-gradient {
+        background: linear-gradient(135deg, #ec4899, #3b82f6, #8b5cf6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .text-gradient:hover {
+        background: linear-gradient(135deg, #f97316, #ec4899, #3b82f6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* Animation des cartes */
+    .card-enter {
+        animation: cardEnter 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes cardEnter {
+        0% {
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    /* Effets de parallaxe */
+    [data-parallax] {
+        will-change: transform;
+    }
+
+    /* Animation des boutons */
+    .btn-magnetic {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-magnetic:hover {
+        transform: translateY(-2px) scale(1.02);
+    }
+
+    /* Ripple effect */
+    .ripple {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ripple::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .ripple:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@layer utilities {
+    .text-shadow-glow {
+        text-shadow: 0 0 24px rgba(255, 255, 255, 0.14);
+    }
+
+    .backdrop-blur-glass {
+        backdrop-filter: blur(16px) saturate(180%);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .animate-pulse-slow {
+        animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    .animate-bounce-slow {
+        animation: bounce 3s infinite;
+    }
+
+}
