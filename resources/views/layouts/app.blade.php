@@ -44,7 +44,7 @@
             <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-fuchsia-500 text-sm font-bold text-white">D</span>
             <div>
                 <p class="font-semibold light:text-slate-900">Dorice</p>
-                <p class="text-xs text-slate-400 light:text-slate-500">Soft Skills, Genre, EMI et capitalisation de projets</p>
+                <p class="text-xs text-slate-400 light:text-slate-500">Soft Skills, Genre, EMI et capitalisation des projets</p>
             </div>
         </a>
 
