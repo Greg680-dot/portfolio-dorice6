@@ -46,6 +46,16 @@
                 </div>
             @endif
 
+            @if($errors->any())
+                <div class="mb-8 rounded-xl border border-red-400/30 bg-red-500/10 p-4 text-red-200 light:bg-red-50 light:text-red-700" data-aos="fade-down">
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             @if(isset($event))
                 <!-- Edit Event Form -->
                 <div class="mb-8 rounded-[2rem] border border-white/10 bg-white/5 p-8 shadow-2xl shadow-slate-950/20 light:border-slate-200 light:bg-slate-50" data-aos="fade-down">
@@ -259,6 +269,16 @@
                         </svg>
                         {{ session('success') }}
                     </div>
+                </div>
+            @endif
+
+            @if($errors->any())
+                <div class="mb-8 rounded-xl border border-red-400/30 bg-red-500/10 p-4 text-red-200 light:bg-red-50 light:text-red-700" data-aos="fade-down">
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             @endif
 

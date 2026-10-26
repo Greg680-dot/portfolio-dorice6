@@ -21,7 +21,7 @@ class TrophyController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:25600',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -50,7 +50,7 @@ class TrophyController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:25600',
         ]);
 
         if ($request->hasFile('photo')) {

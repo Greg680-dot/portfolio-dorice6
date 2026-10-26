@@ -164,8 +164,8 @@ return [
             ],
             [
                 'title' => 'Soft Skills Panel',
-                'tag' => 'Travail hybride',
-                'text' => 'Un panel autour de la collaboration intelligente en environnement hybride, du bien-être au travail et de la performance digitale.',
+                'tag' => 'Webinaire Acte 2',
+                'text' => "Gestion du temps et de l'attention en milieu professionnel : les soft skills pour rester performant face aux sollicitations numériques.",
             ],
             [
                 'title' => 'Conférence Soft Skills',

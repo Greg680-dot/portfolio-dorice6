@@ -164,8 +164,8 @@ return [
             ],
             [
                 'title' => 'Soft Skills Panel',
-                'tag' => 'Hybrid work',
-                'text' => 'A panel on smart collaboration in hybrid environments, workplace well-being and digital performance.',
+                'tag' => 'Webinar Act 2',
+                'text' => 'Time and attention management in the workplace: life skills to stay high-performing amidst digital demands.',
             ],
             [
                 'title' => 'Soft Skills Conference',

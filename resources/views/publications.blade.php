@@ -18,10 +18,9 @@
 
 @php
     $defaultPhotos = [
-        'WhatsApp Image 2026-04-14 at 20.41.50.jpeg',
-        'WhatsApp Image 2026-04-14 at 20.41.52.jpeg',
-        'WhatsApp Image 2026-04-14 at 21.01.03.jpeg',
-        'WhatsApp Image 2026-04-14 at 21.19.46.jpeg',
+        'sisters-mentors.jpg',
+        'soft-skills-panel.jpg',
+        'conference-soft-skills.jpg',
         'WhatsApp Image 2026-04-14 at 21.26.04.jpeg',
         '3.jpeg',
         '2.jpeg',
@@ -29,9 +28,9 @@
     ];
 
     $featuredMeta = [
-        ['date' => '2026', 'photo' => 'WhatsApp Image 2026-04-14 at 20.41.50.jpeg'],
-        ['date' => '30 avril 2026', 'photo' => 'WhatsApp Image 2026-04-14 at 21.01.03.jpeg'],
-        ['date' => '7 mars 2026', 'photo' => 'WhatsApp Image 2026-04-14 at 21.26.04.jpeg'],
+        ['date' => '2026', 'photo' => 'sisters-mentors.jpg'],
+        ['date' => '15 juillet', 'photo' => 'soft-skills-panel.jpg'],
+        ['date' => '7 mars 2026', 'photo' => 'conference-soft-skills.jpg'],
     ];
 
     $featuredPublications = collect(__('site.publications_page.featured'))

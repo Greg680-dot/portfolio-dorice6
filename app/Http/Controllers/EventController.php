@@ -29,7 +29,7 @@ class EventController extends Controller
             'description' => 'required|string',
             'type' => 'required|in:passe,encours,avenir',
             'date' => 'required|date',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:25600',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -57,7 +57,7 @@ class EventController extends Controller
             'description' => 'required|string',
             'type' => 'required|in:passe,encours,avenir',
             'date' => 'required|date',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:25600',
         ]);
 
         if ($request->hasFile('photo')) {

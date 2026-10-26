@@ -64,13 +64,46 @@ sudo chmod -R 775 storage bootstrap/cache
 
 `db:seed` crée (ou met à jour) le compte administrateur utilisé pour se connecter sur `/login`.
 
-## 5. Nginx
+## 5. Nginx & PHP (Résolution erreur 413 Request Entity Too Large)
 
-Copier `deploy/nginx.conf` vers `/etc/nginx/sites-available/dorice-portfolio`, adapter `server_name` et le chemin du socket PHP-FPM (`php -v` pour vérifier la version), puis :
+Par défaut, Nginx bloque les uploads supérieurs à 1 Mo et PHP bloque au-dessus de 2 Mo. Pour que l'upload des photos d'événements et de trophées fonctionne sans erreur **413 Request Entity Too Large** :
+
+### a. Configuration Nginx
+Copier `deploy/nginx.conf` vers `/etc/nginx/sites-available/dorice-portfolio` (qui inclut déjà `client_max_body_size 64M;`), adapter `server_name` et le chemin du socket PHP-FPM (`php -v` pour vérifier la version), puis :
 
 ```bash
 sudo ln -s /etc/nginx/sites-available/dorice-portfolio /etc/nginx/sites-enabled/
+# Si le site default existe encore, le désactiver pour éviter les conflits :
+# sudo rm -f /etc/nginx/sites-enabled/default
 sudo nginx -t && sudo systemctl reload nginx
+```
+
+Si le site utilise déjà une autre config Nginx, ajoutez simplement cette directive dans le bloc `server { ... }` ou dans `/etc/nginx/nginx.conf` (dans `http { ... }`) :
+```nginx
+client_max_body_size 64M;
+```
+
+### b. Configuration PHP-FPM
+Augmenter les limites d'upload dans le fichier `php.ini` de PHP-FPM (ex. `/etc/php/8.3/fpm/php.ini`) :
+
+```ini
+upload_max_filesize = 50M
+post_max_size = 50M
+memory_limit = 256M
+max_execution_time = 300
+```
+
+Puis redémarrer PHP-FPM :
+```bash
+sudo systemctl restart php8.3-fpm
+```
+
+### c. Permissions sur le dossier des images
+Assurez-vous que l'utilisateur Nginx/PHP (`www-data`) a bien le droit d'écrire dans `public/images` :
+```bash
+sudo mkdir -p /var/www/dorice-portfolio/public/images
+sudo chown -R www-data:www-data /var/www/dorice-portfolio/public/images
+sudo chmod -R 775 /var/www/dorice-portfolio/public/images
 ```
 
 ## 6. HTTPS
